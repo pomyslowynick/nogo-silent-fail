@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "TOOLS_NOGO", "nogo")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+nogo(
+    name = "nogo-linter",
+    visibility = ["//visibility:public"],  # must have public visibility
+    deps = TOOLS_NOGO,
+)
+
+
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/rrosa/go/service/main",
+    visibility = ["//visibility:private"],
+    deps = ["@org_golang_x_tools//go/analysis:go_default_library"],
+)
+
+go_binary(
+    name = "main",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)
