@@ -42,6 +42,5 @@ http_archive(
 
 load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_repositories")
 
-jsonnet_repositories()
 
 go_register_toolchains(nogo = "@//:nogo-linter", version = "1.21.1")
