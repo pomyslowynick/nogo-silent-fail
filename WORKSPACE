@@ -33,6 +33,8 @@ go_rules_dependencies()
 
 rules_jsonnet_version = "0.5.0"
 
+go_register_toolchains(nogo = "@//:nogo-linter", version = "1.21.1")
+
 http_archive(
     name = "io_bazel_rules_jsonnet",
     sha256 = "c51ba0dba41d667fa5c64e56e252ba54be093e5ae764af6470dabca901f373eb",
@@ -42,5 +44,13 @@ http_archive(
 
 load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_repositories")
 
+jsonnet_repositories()
 
-go_register_toolchains(nogo = "@//:nogo-linter", version = "1.21.1")
+load("@google_jsonnet_go//bazel:repositories.bzl", "jsonnet_go_repositories")
+
+jsonnet_go_repositories()
+
+load("@google_jsonnet_go//bazel:deps.bzl", "jsonnet_go_dependencies")
+
+jsonnet_go_dependencies("1.21.1")
+
